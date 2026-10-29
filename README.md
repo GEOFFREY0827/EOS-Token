@@ -1,5 +1,7 @@
 # EoS ablation — 方向 1 第一步
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GEOFFREY0827/EOS-Token/blob/main/EOS_ablation_colab.ipynb)
+
 在 LLaDA 上回答两个问题，全部只需推理，不需要训练。
 
 1. **EoS 带来的提升，来自 EoS 这个 token 本身，还是来自"多出来的位置"？**
@@ -23,6 +25,10 @@ LLaDA 官方建模代码在调用 SDPA 时写死了 `attn_mask=None`，所以传
 **跑任何结果之前先跑 `--selftest`。** 它检查两件事：`nowrite_all` 下答案槽位的 logits 应当和 `n_tail=0` 基本一致；`full` 下应当明显不同。显示 FAIL 就说明 hook 没生效，所有 attention 消融的结果都不可信。如果 bf16 噪声导致误判，可以加 `--dtype fp32` 再跑一次 selftest。
 
 ## 运行
+
+**Colab（A100）**：打开 `EOS_ablation_colab.ipynb`，按顺序运行即可，结果保存到 Google Drive。
+
+**自己的服务器**：
 
 ```bash
 git clone https://github.com/minaolensarah/thinking_eos-by-eos.git   # 只用它的数据集
